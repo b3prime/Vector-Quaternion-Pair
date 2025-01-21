@@ -1,0 +1,20 @@
+pose1 = Pose([1, 2, 3], [0.7071, 0, 0.7071, 0]);
+pose1.displayPose();
+
+pose2 = Pose([2, 2, 2], [1, 1, 0, 1]);
+pose2.displayPose();
+
+function P3 = composePoses(P1, P2)
+    q1 = get(P1, 'Quaternion');
+    q2 = get(P2, 'Quaternion');
+       
+    t1 = get(P1, 'Position');
+    t2 = get(P2, 'Position');
+
+    newQuaternion = quatmultiply(q1, q2);
+    newPosition = t1 + q1 * t2;
+
+    P3 = Pose(newPosition, newQuaternion);
+end
+
+composePoses()
